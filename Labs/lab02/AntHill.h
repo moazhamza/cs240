@@ -1,6 +1,8 @@
 #ifndef ANTHILL_H
 #define ANTHILL_H
 
+#define TOTAL_MAX_ANTS 100
+
 class Ant{
     private:
        int id;
@@ -22,7 +24,7 @@ class AntHill{
     private:
         int max_ants;
         int current_ants;
-        Ant ants[100];
+        Ant ants[TOTAL_MAX_ANTS];
         int next_id;
     public:
         AntHill(int);
