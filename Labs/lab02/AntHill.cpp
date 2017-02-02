@@ -24,10 +24,10 @@ Ant::Ant(){
 }
 
 /* Valid ant constructor which sets position to (0,0) and sets its ID using the argument */
-Ant::Ant(int ID){
+Ant::Ant(int id){
     x = 0;
     y = 0;
-    id = ID;
+    this->id = id;
 }
 
 /* Move the ant 1 unit in a random direction */
