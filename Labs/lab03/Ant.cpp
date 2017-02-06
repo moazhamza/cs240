@@ -1,5 +1,6 @@
 #include "Ant.h"
 #include <cstdlib>
+#include <iostream>
 
 #define INVALID_ID -1
 
@@ -58,16 +59,20 @@ void Ant::move(){
 Ant *Ant::fight(Ant * otherAnt){ 
     int myEXP = this->getEXP();
     int otherEXP = otherAnt->getEXP();
-    
+    cout << "Ant #" << this->getID() << " with " << myEXP << " EXP vs. ";
+    cout << "Ant #" << otherAnt->getID() << " with " << otherEXP << " EXP." << endl;
+
     int myScore = rand() % myEXP;
     int otherScore = rand() % otherEXP;
 
     if(myScore >= otherScore){
         this->setEXP(myEXP + otherEXP);
+        cout << "The winner is: Ant #" << this->getID() << endl;
         return this; 
     }
     else{
         otherAnt->setEXP(myEXP + otherEXP);
+        cout << "The winner is: Ant #" << otherAnt->getID() << endl;
         return otherAnt;
     }
 }

@@ -101,8 +101,6 @@ int main(){
 	Ant * ant = new Ant(0);
 	for(int i = 20; i > 0; i--){
 		Ant * challenger = new Ant(i);
-        cout << "Ant #" << ant->getID() << " with " << ant->getEXP() << " EXP vs. ";
-        cout << "Ant #" << challenger->getID() << " with " << challenger->getEXP() << " EXP." << endl;
 		Ant * winner = ant->fight(challenger);
 		if(winner == ant){
 			delete challenger;
@@ -110,9 +108,8 @@ int main(){
 			delete ant;
 			ant = challenger;
 		}
-        cout << "The winner is: Ant #" << ant->getID() << endl;
 	}
-    delete ant;
+	delete ant;
 #endif
 	return 0;
 }
