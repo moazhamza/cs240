@@ -59,6 +59,11 @@ void List::operator<<(Ant *newAnt){
 
 void List::printList(){
     Node *curr = this->head;
+    if (curr == 0){
+        std::cerr << "This is an empty list" << std::endl;
+        return;
+    }
+
     while(curr->getNextNode() !=  0){
         std::cerr << curr->getAntPtr()->getID() << "-->" << std::endl;
         curr = curr->getNextNode();
