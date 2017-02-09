@@ -1,29 +1,21 @@
 C_FLAGS=-Wall -Wextra -DDEBUG -g -pedantic -std=c++14
-SOURCES = $(PROJECT_NAME).cpp Ant.cpp lab3.cpp
-PROJECT_NAME = AntHill
-EXECUTABLE = lab3
 
-all: $(EXECUTABLE)
+all: driver
 
-$(EXECUTABLE): $(PROJECT_NAME).o Ant.o $(EXECUTABLE).o
-	g++ $(C_FLAGS) $(PROJECT_NAME).o Ant.o $(EXECUTABLE).o -o $(EXECUTABLE)
+driver: LinkedList.o Ant.o driver.o
+	g++ $(C_FLAGS) LinkedList.o driver.o Ant.o -o driver
 
-$(PROJECT_NAME).o: $(PROJECT_NAME).cpp $(PROJECT_NAME).h
-	g++ -c $(C_FLAGS) $(PROJECT_NAME).cpp -o $(PROJECT_NAME).o
+LinkedList.o: LinkedList.cpp LinkedList.h
+	g++ -c $(C_FLAGS) LinkedList.cpp -o LinkedList.o
 
 Ant.o: Ant.cpp Ant.h
 	g++ -c $(C_FLAGS) Ant.cpp -o Ant.o
 
-$(EXECUTABLE).o: lab3.cpp
-	g++ -c $(C_FLAGS) $(EXECUTABLE).cpp -o lab3.o
+driver.o: driver.cpp
+	g++ -c $(C_FLAGS) driver.cpp -o driver.o
 
-run: all
-	./$(EXECUTABLE)
-
-checkmem: all
-	valgrind ./$(EXECUTABLE)
+run: driver
+	./driver
 
 clean:
-	rm -f *.o $(EXECUTABLE)
-
-
+	rm -f *.o driver

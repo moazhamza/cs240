@@ -23,9 +23,10 @@ class List{
         List(const List&);
         ~List();
        
-        void addElement(Ant*);
+        void addAnt(Ant*);
         void operator<<(Ant*);
-        bool deleteElement(int);
+        bool deleteAnt(int);
+        Ant *findAnt(int);
 
         void printList();
 

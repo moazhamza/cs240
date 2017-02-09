@@ -29,7 +29,7 @@ Node *List::findLastNode(){
     return curr;
 }
 
-void List::addElement(Ant* newAnt){
+void List::addAnt(Ant* newAnt){
     Node *newNode = new Node(newAnt);
     if (this->head == 0) this->head = newNode;
     else{
@@ -39,9 +39,10 @@ void List::addElement(Ant* newAnt){
 }
 
 
-bool List::deleteElement(int antID){
+bool List::deleteAnt(int antID){
     Node *curr = this->head;
     Node *last = 0;
+    if (curr == 0) return false;
     while(curr->getAntPtr()->getID() != antID){
         last = curr;
         curr = curr->getNextNode();
@@ -52,9 +53,18 @@ bool List::deleteElement(int antID){
     return true;
 
 }
+Ant *List::findAnt(int antID){
+    Node *curr = this->head;
+    if (curr == 0) return 0;
+    while(curr->getAntPtr()->getID() != antID){
+        curr = curr->getNextNode();
+        if (curr == 0) return 0;
+    }
+    return curr->getAntPtr();
+}
 
 void List::operator<<(Ant *newAnt){
-    this->addElement(newAnt);
+    this->addAnt(newAnt);
 }
 
 void List::printList(){
@@ -65,7 +75,7 @@ void List::printList(){
     }
 
     while(curr->getNextNode() !=  0){
-        std::cerr << curr->getAntPtr()->getID() << "-->" << std::endl;
+        std::cerr << curr->getAntPtr()->getID() << "-->";
         curr = curr->getNextNode();
     }
 
