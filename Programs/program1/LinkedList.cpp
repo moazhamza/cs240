@@ -19,6 +19,8 @@ List::List(const List &other){
     this->head = other.head;
 }
 
+List::~List(){}
+
 Node *List::findLastNode(){ 
     Node *curr = this->head;
     while(curr->getNextNode() != 0){

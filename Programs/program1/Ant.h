@@ -21,7 +21,4 @@ class Ant{
 };
 
 
-
-
-
 #endif
