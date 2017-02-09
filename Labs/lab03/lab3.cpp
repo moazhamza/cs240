@@ -55,7 +55,6 @@ int main(){
 	//delete 10 random ants in the hill
 	for(int i = 0; i < 10; i++){
 		int rand_id = (rand() % (NUM_ANTS_TO_TEST - 10)) + 10;
-		int num_ants = hill->getCurrentNumAnts();
 		if(hill->removeAnt(all_ids[rand_id]) == true){
 			all_ids[rand_id] = -1;
 			assert(hill->getCurrentNumAnts() == --num_ants);

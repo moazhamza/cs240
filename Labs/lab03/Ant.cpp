@@ -76,3 +76,4 @@ Ant *Ant::fight(Ant * otherAnt){
         return otherAnt;
     }
 }
+
