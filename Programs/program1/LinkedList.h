@@ -4,14 +4,11 @@
 #include "Ant.h"
 
 class Node{
-    private: 
-        Ant *data;
-        Node *next;
-    public:
+    public: 
         Node(Ant*);
-        Node *getNextNode(){return next;}
-        void setNextNode(Node * n){this->next = n;}
-        Ant *getAntPtr(){return data;}
+        Ant *ant;
+        Node *next;
+
 };
 
 class List{
@@ -27,7 +24,9 @@ class List{
         void operator<<(Ant*);
         bool deleteAnt(int);
         Ant *findAnt(int);
+        void move();
 
+        void printHillInfo();
         void printList();
 
 

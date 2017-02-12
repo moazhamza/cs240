@@ -2,12 +2,13 @@
 #define ANTHILL_H
 
 #include "Ant.h"
+#include "LinkedList.h"
 
 class AntHill{
 
     private:
         int current_ants;
-        Ant **ants;
+        List *listOfAnts = new List();
         int next_id;
 
     public:

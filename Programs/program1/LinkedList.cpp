@@ -5,7 +5,7 @@
 // Node implementation 
      
 Node::Node(Ant* ant){
-    this->data = ant;
+    this->ant = ant;
     this->next = 0;
 }
 
@@ -23,8 +23,8 @@ List::~List(){}
 
 Node *List::findLastNode(){ 
     Node *curr = this->head;
-    while(curr->getNextNode() != 0){
-        curr = curr->getNextNode();
+    while(curr->next != 0){
+        curr = curr->next;
     }
     return curr;
 }
@@ -34,7 +34,7 @@ void List::addAnt(Ant* newAnt){
     if (this->head == 0) this->head = newNode;
     else{
         Node *lastNode = this->findLastNode();
-        lastNode->setNextNode(newNode);
+        lastNode->next = newNode;
     }
 }
 
@@ -43,30 +43,45 @@ bool List::deleteAnt(int antID){
     Node *curr = this->head;
     Node *last = 0;
     if (curr == 0) return false;
-    while(curr->getAntPtr()->getID() != antID){
+    while(curr->ant->getID() != antID){
         last = curr;
-        curr = curr->getNextNode();
+        curr = curr->next;
         if (curr == 0) return false;
     }
-    last->setNextNode(curr->getNextNode());
-    curr->setNextNode(0);
+    last->next = curr->next;
+    curr->next = 0;
     return true;
 
 }
 Ant *List::findAnt(int antID){
     Node *curr = this->head;
     if (curr == 0) return 0;
-    while(curr->getAntPtr()->getID() != antID){
-        curr = curr->getNextNode();
+    while(curr->ant->getID() != antID){
+        curr = curr->next;
         if (curr == 0) return 0;
     }
-    return curr->getAntPtr();
+    return curr->ant;
+}
+
+void List::move(){
+    Node *curr = this->head;
+    while(curr != 0){
+        curr->ant->move();
+        curr = curr->next;
+    }
+
 }
 
 void List::operator<<(Ant *newAnt){
     this->addAnt(newAnt);
 }
 
+void List::printHillInfo(){
+    Node *curr = this->head;
+    while(curr != 0){
+        std::cout << "Ant #" << curr->ant->getID() << " [" << curr->ant->getX() << "," << curr->ant->getY() << "]" << std::endl;
+    }
+}
 void List::printList(){
     Node *curr = this->head;
     if (curr == 0){
@@ -74,11 +89,12 @@ void List::printList(){
         return;
     }
 
-    while(curr->getNextNode() !=  0){
-        std::cerr << curr->getAntPtr()->getID() << "-->";
-        curr = curr->getNextNode();
+    while(curr->next !=  0){
+        std::cerr << curr->ant->getID() << "-->";
+        curr = curr->next;
     }
 
-    std::cerr << curr->getAntPtr()->getID() << "--> 0" << std::endl;
+    std::cerr << curr->ant->getID() << "--> 0" << std::endl;
 }
+
 

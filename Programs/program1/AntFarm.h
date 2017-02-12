@@ -4,7 +4,9 @@
 class AntFarm{
     private:
         AntHill *antHill;
+        int food; 
     public:
-        AntFarm(AntHill);
+        AntFarm();
+        int getNumFood(){return food;}
         
 };
