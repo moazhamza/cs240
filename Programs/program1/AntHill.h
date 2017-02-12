@@ -10,6 +10,7 @@ class AntHill{
         int current_ants;
         List *listOfAnts = new List();
         int next_id;
+        int food;
 
     public:
         AntHill();
@@ -20,6 +21,7 @@ class AntHill{
 
         Ant *getAnt(int);
         int getCurrentNumAnts(){return current_ants;}
+        int getFood();
 
         void move();
 
