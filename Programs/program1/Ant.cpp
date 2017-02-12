@@ -46,6 +46,17 @@ void Ant::move(){
     else if (directionToBeChanged == SOUTH) y--;
 }
 
+/* 
+ * Move ant with maximum grid 
+ */
+void Ant::move(int max){
+    int directionToBeChanged = rand() % RANDOM_DIRECTION;
+    if ((directionToBeChanged == EAST) && (x+1 < max)) x++;
+    else if ((directionToBeChanged == WEST) && (x-1 < -max)) x--;
+    else if ((directionToBeChanged == NORTH) && (y+1 < max)) y++;
+    else if ((directionToBeChanged == SOUTH) && (y-1 < -max)) y--;
+}
+
 /* Allows another Ant object to challenge this ant object
  * to a fight. 
  * 

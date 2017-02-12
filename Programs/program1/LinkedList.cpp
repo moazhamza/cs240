@@ -19,7 +19,13 @@ List::List(const List &other){
     this->head = other.head;
 }
 
-List::~List(){}
+List::~List(){
+    Node *curr = head;
+    while(curr != 0){
+        delete curr->ant;
+        curr = curr->next;
+    }
+}
 
 Node *List::findLastNode(){ 
     Node *curr = this->head;
@@ -63,10 +69,10 @@ Ant *List::findAnt(int antID){
     return curr->ant;
 }
 
-void List::move(){
+void List::move(int gridSize){
     Node *curr = this->head;
     while(curr != 0){
-        curr->ant->move();
+        curr->ant->move(gridSize);
         curr = curr->next;
     }
 

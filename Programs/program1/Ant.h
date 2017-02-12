@@ -11,6 +11,7 @@ class Ant{
         Ant(int);
         Ant();
         void move();
+        void move(int);
         Ant *fight(Ant *);
 
         int getID(){return this->id;}

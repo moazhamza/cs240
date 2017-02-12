@@ -24,7 +24,9 @@ class List{
         void operator<<(Ant*);
         bool deleteAnt(int);
         Ant *findAnt(int);
+
         void move();
+        void move(int);
 
         void printHillInfo();
         void printList();

@@ -10,8 +10,8 @@ class AntHill{
         int current_ants;
         List *listOfAnts = new List();
         int next_id;
-        int food;
-
+        unsigned int food;
+        int gridSize;
     public:
         AntHill();
         ~AntHill();
@@ -21,12 +21,13 @@ class AntHill{
 
         Ant *getAnt(int);
         int getCurrentNumAnts(){return current_ants;}
-        int getFood();
+        unsigned int getFood(){return food;}
 
+        void attack(); 
         void move();
 
         void printHillInfo();
-
+        void runTurn();
 };
 
 #endif 
