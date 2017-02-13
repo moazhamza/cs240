@@ -25,9 +25,10 @@ class AntHill{
 
         void attack(); 
         void move();
+        
 
         void printHillInfo();
-        void runTurn();
+        void turn();
 };
 
 #endif 

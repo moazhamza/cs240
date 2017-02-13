@@ -63,12 +63,15 @@ void AntHill::printHillInfo(){
 void AntHill::attack(){
    bool attack = rand() % 5 == 0;
    if (attack){
-        int numDefenders = determineNumDefenders();
+        int numDefenders = listOfAnts->determineNumDefenders(this->gridSize);
         int numAttackers = rand() % current_ants;
-        if 
+        if (numDefenders > numAttacking) return;
+        else{
+            listOfAnts->removeDefendingAnts();
+        }
    }
 }
-void AntHill::runTurn(){
+void AntHill::turn(){
     while(getFood() > 0) addAnt();   
     this->move();
     this->attack();

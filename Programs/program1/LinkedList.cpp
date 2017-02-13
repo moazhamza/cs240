@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#define HALF 0.5
 // Node implementation 
      
 Node::Node(Ant* ant){
@@ -76,6 +77,24 @@ void List::move(int gridSize){
         curr = curr->next;
     }
 
+}
+
+int List::determineNumDefenders(int gridSize){
+    Node *curr = head;
+    int numDefenders = 0;
+    while(curr != 0){
+        Ant anAnt = *(curr->ant);
+        if(anAnt.getX() < HALF*gridSize && anAnt.getY() < HALF*gridSize) numDefenders++;
+    }
+    return numDefenders;
+}
+
+void List::removeDefendingAnts(){
+    Node *curr = head;
+    while(curr != 0){
+        Ant anAnt = *(curr->ant);
+        if(anAnt.getX() < HALF*gridSize && anAnt.getY() < HALF*gridSize) this->deleteAnt(ant.getID);
+    }
 }
 
 void List::operator<<(Ant *newAnt){

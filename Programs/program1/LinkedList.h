@@ -28,6 +28,9 @@ class List{
         void move();
         void move(int);
 
+        int determineNumDefenders(int);
+        void removeDefendingAnts();
+
         void printHillInfo();
         void printList();
 
