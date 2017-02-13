@@ -1,6 +1,8 @@
 #ifndef ANTHILL_H
 #define ANTHILL_H
 
+#include <fstream>
+
 #include "Ant.h"
 #include "LinkedList.h"
 
@@ -12,6 +14,8 @@ class AntHill{
         int next_id;
         unsigned int food;
         int gridSize;
+        unsigned int numAttacks;
+        unsigned int losses;
     public:
         AntHill();
         ~AntHill();
@@ -25,8 +29,9 @@ class AntHill{
 
         void attack(); 
         void move();
+        void fightOrFood(std::fstream&);
         
-
+        void outputHillStatus(std::fstream&);
         void printHillInfo();
         void turn();
 };

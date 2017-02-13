@@ -1,7 +1,9 @@
 #include "AntHill.h"
 #include "Ant.h"
+
 #include <iostream>
 #include <cstdlib>
+#include <fstream>
 
 using namespace std;
 
@@ -14,6 +16,8 @@ AntHill::AntHill(){
     next_id = 3;
     food = 0;
     gridSize = 25; 
+    numAttacks = 0;
+    losses = 0;
     for(int i=0;i<3;i++) listOfAnts->addAnt(new Ant(i));
 }
 
@@ -63,18 +67,43 @@ void AntHill::printHillInfo(){
 void AntHill::attack(){
    bool attack = rand() % 5 == 0;
    if (attack){
+        numAttacks++;
         int numDefenders = listOfAnts->determineNumDefenders(this->gridSize);
         int numAttackers = rand() % current_ants;
-        if (numDefenders > numAttacking) return;
+        if (numDefenders > numAttackers) return;
         else{
-            listOfAnts->removeDefendingAnts();
+            listOfAnts->removeDefendingAnts(gridSize);
+            losses++;
         }
    }
 }
+
+void AntHill::fightOrFood(fstream& logFile){
+    this->food += listOfAnts->fightOrFood(logFile);
+}
+
+void AntHill::outputHillStatus(fstream& file){
+    file << "The hill currently has:\
+             \n\tFood: " << food
+             << "\n\tAnts: " << current_ants << endl;
+    file << "The hill has been attacked " << numAttacks << " times. \
+                \n\t Successfully defended: " << numAttacks - losses << "\
+                \n\t Failed to Defend: " << losses << endl;
+}
+
 void AntHill::turn(){
-    while(getFood() > 0) addAnt();   
+    fstream logFile;
+    logFile.open("anthill.log", ios::app);
+
+    this->outputHillStatus(logFile); 
+
+    while(getFood() > 0) {
+        addAnt();
+    }
+
     this->move();
     this->attack();
+    this->fightOrFood(logFile);
 
-
+    logFile.close();
 }

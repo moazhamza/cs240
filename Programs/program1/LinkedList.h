@@ -2,6 +2,7 @@
 #define LINKED_LIST_H
 
 #include "Ant.h"
+#include <fstream>
 
 class Node{
     public: 
@@ -29,7 +30,9 @@ class List{
         void move(int);
 
         int determineNumDefenders(int);
-        void removeDefendingAnts();
+        void removeDefendingAnts(int);
+
+        int fightOrFood(std::fstream&); 
 
         void printHillInfo();
         void printList();

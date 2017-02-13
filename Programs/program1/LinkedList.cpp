@@ -89,12 +89,36 @@ int List::determineNumDefenders(int gridSize){
     return numDefenders;
 }
 
-void List::removeDefendingAnts(){
+void List::removeDefendingAnts(int gridSize){
     Node *curr = head;
     while(curr != 0){
         Ant anAnt = *(curr->ant);
-        if(anAnt.getX() < HALF*gridSize && anAnt.getY() < HALF*gridSize) this->deleteAnt(ant.getID);
+        if(anAnt.getX() < HALF*gridSize && anAnt.getY() < HALF*gridSize) this->deleteAnt(anAnt.getID());
     }
+}
+
+int List::fightOrFood(fstream& file){
+    Node *curr = head;
+    int foodToAdd = 0;
+    while(curr != 0){
+        Ant anAnt = *(curr->ant);
+        if(rand() % 5 == 0){
+           file << "Ant #" << anAnt.getID() << " has run into a rival ant" << std::endl;
+           Ant *rivalAnt = new Ant(-1);
+           Ant *winner = anAnt.fight(rivalAnt);
+           if(winner->getID() != anAnt.getID()){
+               file << "Ant #" << anAnt.getID() << "loses the fight and dies" << std::endl;
+               this->deleteAnt(winner->getID());
+               
+           }
+           delete rivalAnt;
+        }
+        else if(rand() % 5 == 0){
+            file << "Ant #" << anAnt.getID()  << " has found food!" << std::endl;
+            foodToAdd++;   
+        }
+    }   
+    return foodToAdd;
 }
 
 void List::operator<<(Ant *newAnt){
