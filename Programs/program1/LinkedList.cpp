@@ -55,7 +55,7 @@ bool List::deleteAnt(int antID){
         curr = curr->next;
         if (curr == 0) return false;
     }
-    last->next = curr->next;
+    if (last != 0) last->next = curr->next;
     curr->next = 0;
     return true;
 
@@ -85,6 +85,7 @@ int List::determineNumDefenders(int gridSize){
     while(curr != 0){
         Ant anAnt = *(curr->ant);
         if(anAnt.getX() < HALF*gridSize && anAnt.getY() < HALF*gridSize) numDefenders++;
+        curr = curr->next;
     }
     return numDefenders;
 }
@@ -94,10 +95,11 @@ void List::removeDefendingAnts(int gridSize){
     while(curr != 0){
         Ant anAnt = *(curr->ant);
         if(anAnt.getX() < HALF*gridSize && anAnt.getY() < HALF*gridSize) this->deleteAnt(anAnt.getID());
+        curr = curr->next;
     }
 }
 
-int List::fightOrFood(fstream& file){
+int List::fightOrFood(std::fstream& file){
     Node *curr = head;
     int foodToAdd = 0;
     while(curr != 0){
@@ -108,7 +110,7 @@ int List::fightOrFood(fstream& file){
            Ant *winner = anAnt.fight(rivalAnt);
            if(winner->getID() != anAnt.getID()){
                file << "Ant #" << anAnt.getID() << "loses the fight and dies" << std::endl;
-               this->deleteAnt(winner->getID());
+               this->deleteAnt(anAnt.getID());
                
            }
            delete rivalAnt;
@@ -117,6 +119,7 @@ int List::fightOrFood(fstream& file){
             file << "Ant #" << anAnt.getID()  << " has found food!" << std::endl;
             foodToAdd++;   
         }
+        curr = curr->next;
     }   
     return foodToAdd;
 }
@@ -129,6 +132,7 @@ void List::printHillInfo(){
     Node *curr = this->head;
     while(curr != 0){
         std::cout << "Ant #" << curr->ant->getID() << " [" << curr->ant->getX() << "," << curr->ant->getY() << "]" << std::endl;
+        curr = curr->next;
     }
 }
 void List::printList(){

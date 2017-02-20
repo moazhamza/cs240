@@ -1,6 +1,6 @@
 #include "Ant.h"
 #include <cstdlib>
-#include <iostream>
+#include <iostream> 
 
 #define INVALID_ID -1
 
@@ -21,7 +21,7 @@ Ant::Ant(int id){
     this->id = id;
     this->x = 0;
     this->y = 0;
-    this->exp = rand() % MAX_EXP;
+    this->exp = (rand() % MAX_EXP)+1;
 }
 
 /*
@@ -52,9 +52,9 @@ void Ant::move(){
 void Ant::move(int max){
     int directionToBeChanged = rand() % RANDOM_DIRECTION;
     if ((directionToBeChanged == EAST) && (x+1 < max)) x++;
-    else if ((directionToBeChanged == WEST) && (x-1 < -max)) x--;
+    else if ((directionToBeChanged == WEST) && (x-1 < 0)) x--;
     else if ((directionToBeChanged == NORTH) && (y+1 < max)) y++;
-    else if ((directionToBeChanged == SOUTH) && (y-1 < -max)) y--;
+    else if ((directionToBeChanged == SOUTH) && (y-1 < 0)) y--;
 }
 
 /* Allows another Ant object to challenge this ant object
@@ -62,7 +62,7 @@ void Ant::move(int max){
  * 
  * The outcome of the fight is based on the exp value of each ant
  *
- * A random number from 0 to the exp of the corresponding ant is assigned 
+ * A random number from 1 to the exp of the corresponding ant is assigned 
  * as the score of that ant
  *
  * The ant with the higher score wins and gains the experience of the losing ant

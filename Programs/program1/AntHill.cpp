@@ -70,6 +70,7 @@ void AntHill::attack(){
         numAttacks++;
         int numDefenders = listOfAnts->determineNumDefenders(this->gridSize);
         int numAttackers = rand() % current_ants;
+        cerr << "numDefenders = " << numDefenders << "vs. " << numAttacks << endl;
         if (numDefenders > numAttackers) return;
         else{
             listOfAnts->removeDefendingAnts(gridSize);
@@ -95,10 +96,12 @@ void AntHill::turn(){
     fstream logFile;
     logFile.open("anthill.log", ios::app);
 
+    logFile << "------------- New AntFarm Simulation --------------" << endl;
     this->outputHillStatus(logFile); 
 
-    while(getFood() > 0) {
+    while(food > 0) {
         addAnt();
+        food--;
     }
 
     this->move();
