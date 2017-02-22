@@ -2,9 +2,8 @@
 
 #include <iostream>
 
-#define HALF 0.5
-// Node implementation 
-     
+// Node implementation
+
 Node::Node(Ant* ant){
     this->ant = ant;
     this->next = 0;
@@ -24,11 +23,12 @@ List::~List(){
     Node *curr = head;
     while(curr != 0){
         delete curr->ant;
+		delete curr;
         curr = curr->next;
     }
 }
 
-Node *List::findLastNode(){ 
+Node *List::findLastNode(){
     Node *curr = this->head;
     while(curr->next != 0){
         curr = curr->next;
@@ -47,19 +47,31 @@ void List::addAnt(Ant* newAnt){
 
 
 bool List::deleteAnt(int antID){
-    Node *curr = this->head;
+    Node *current = this->head;
     Node *last = 0;
-    if (curr == 0) return false;
-    while(curr->ant->getID() != antID){
-        last = curr;
-        curr = curr->next;
-        if (curr == 0) return false;
+    if (current == 0) return false;
+    while(current->ant->getID() != antID){
+        last = current;
+        current = current->next;
+        if (current == 0){
+            curr = head;
+            return false;
+        }
     }
-    if (last != 0) last->next = curr->next;
-    curr->next = 0;
+    this->curr = head;
+    if (current == this->head){
+        this->head = current->next;
+    }
+    if (last != 0){
+        last->next = current->next;
+    }
+	delete current->ant;
+	delete current;
+    
     return true;
-
+    
 }
+
 Ant *List::findAnt(int antID){
     Node *curr = this->head;
     if (curr == 0) return 0;
@@ -70,58 +82,21 @@ Ant *List::findAnt(int antID){
     return curr->ant;
 }
 
-void List::move(int gridSize){
+void List::move(int grid_size){
     Node *curr = this->head;
     while(curr != 0){
-        curr->ant->move(gridSize);
+        curr->ant->move(grid_size);
         curr = curr->next;
     }
-
+    
 }
 
-int List::determineNumDefenders(int gridSize){
-    Node *curr = head;
-    int numDefenders = 0;
-    while(curr != 0){
-        Ant anAnt = *(curr->ant);
-        if(anAnt.getX() < HALF*gridSize && anAnt.getY() < HALF*gridSize) numDefenders++;
-        curr = curr->next;
-    }
-    return numDefenders;
+void List::setCurrToHead(){
+    curr = head;
 }
 
-void List::removeDefendingAnts(int gridSize){
-    Node *curr = head;
-    while(curr != 0){
-        Ant anAnt = *(curr->ant);
-        if(anAnt.getX() < HALF*gridSize && anAnt.getY() < HALF*gridSize) this->deleteAnt(anAnt.getID());
-        curr = curr->next;
-    }
-}
-
-int List::fightOrFood(std::fstream& file){
-    Node *curr = head;
-    int foodToAdd = 0;
-    while(curr != 0){
-        Ant anAnt = *(curr->ant);
-        if(rand() % 5 == 0){
-           file << "Ant #" << anAnt.getID() << " has run into a rival ant" << std::endl;
-           Ant *rivalAnt = new Ant(-1);
-           Ant *winner = anAnt.fight(rivalAnt);
-           if(winner->getID() != anAnt.getID()){
-               file << "Ant #" << anAnt.getID() << "loses the fight and dies" << std::endl;
-               this->deleteAnt(anAnt.getID());
-               
-           }
-           delete rivalAnt;
-        }
-        else if(rand() % 5 == 0){
-            file << "Ant #" << anAnt.getID()  << " has found food!" << std::endl;
-            foodToAdd++;   
-        }
-        curr = curr->next;
-    }   
-    return foodToAdd;
+void List::advanceCurr(){
+    curr = curr->next;
 }
 
 void List::operator<<(Ant *newAnt){
@@ -141,13 +116,12 @@ void List::printList(){
         std::cerr << "This is an empty list" << std::endl;
         return;
     }
-
+    
     while(curr->next !=  0){
         std::cerr << curr->ant->getID() << "-->";
         curr = curr->next;
     }
-
+    
     std::cerr << curr->ant->getID() << "--> 0" << std::endl;
 }
-
 
