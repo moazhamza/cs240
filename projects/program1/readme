@@ -1,0 +1,34 @@
+CS240 Date Structures and Algorithms
+Spring 2017
+Program 1 README FILE
+
+Due Date: 2/22/17 
+Submission Date: 2/22/17
+Author(s): Moaz Hamza
+
+PERCENT COMPLETE: 100%
+How much of the project you believe you have completed
+
+PARTS THAT ARE NOT COMPLETE: None
+What parts of the project you were not able to complete
+
+BUGS: AntHill more likely to reach 0 ants than 100 ants
+Known bugs
+
+FILES: Ant.h Ant.cpp AntHill.h AntHill.cpp LinkedList.h LinkedList.cpp anthill.log program1.cpp makefile readme
+A list of files included in the archive, including this README
+
+TO RUN: unzip program1
+        make run
+Instructions for extracting your archive and running your code
+
+EXTRA CREDIT: N/A
+Describe any extra credit you may have completed here
+
+BIBLIOGRAPHY: N/A
+Any references or resources you may have used to help you complete the program
+
+MISCELLANEOUS: None
+Any additional notes you feel are relevant to your submission
+
+
