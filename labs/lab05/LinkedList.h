@@ -11,6 +11,9 @@ public:
         this->data = data;
         next = nullptr;
     }
+    ~Node(){
+        delete data;
+    }
   
 };
 

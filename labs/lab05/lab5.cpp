@@ -12,7 +12,7 @@
 #include <ctime>
 #include <cstdlib>
 
-#define EXTRA_CREDIT 1
+#define EXTRA_CREDIT 0
 
 using namespace std;
 
@@ -112,7 +112,7 @@ int main(){
 	}
 	assert(num_cards == 52);
 
-	cerr << "\n\t========================PASS========================\n" << endl;
+	cerr << "\n\t========================PASS========================\n" << endl; 
 
 #if EXTRA_CREDIT
 	cerr << "\n\tTEST #8: EXTRA CREDIT -- Shuffle" << endl;
