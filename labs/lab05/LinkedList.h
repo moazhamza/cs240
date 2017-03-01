@@ -4,12 +4,14 @@
 template <class T>
 class Node{
 public:
-    Node(T* data){
+    T *data;
+    Node *next;
+    
+    Node(T *data){
         this->data = data;
         next = nullptr;
-   }
-    T* data;
-    Node *next;
+    }
+  
 };
 
 template <class T>
@@ -17,32 +19,50 @@ class LinkedList{
 private:
     Node<T> *head;
     Node<T> *curr;
+    template<class U> friend class Queue;
+    
+    Node<T>* findLastNode(){
+        Node<T> *currentNode = head;
+        while(currentNode->next != nullptr) currentNode = currentNode->next;
+        return currentNode;
+    }
+
 public:
     LinkedList(){
         head = nullptr;   
     }
-    LinkedList(const LinkedList<T>& sll){
-        this->head = sll.head; 
+    LinkedList(const LinkedList<T>& sll){  //fix copy constructor
+        this->head = sll.head;
+        /*Node<T> * temp = head;
+        while(temp != NULL)*/
+        
+        
     }
     ~LinkedList(){
         Node<T> *next, *curr;
-        for(*curr = head; curr != nullptr; (curr = next)){ 
+        for(curr = head; curr != nullptr; (curr = next)){
             next = curr->next;
             delete curr;
         }        
     }
     
-    void insert(T data){
-        Node<T> curr;
-        for(curr = head; curr->next != nullptr; curr = curr->next);
-        Node<T> newNode(data);
-        curr->next = newNode;
+    bool insert(T data){
+        T *dataPtr = new T(data);
+        Node<T> *newNode = new Node<T>(dataPtr);
+        if(empty()){
+            head = newNode;
+            curr = head;
+            return true;
+        }
+        Node<T> *lastNode = findLastNode();
+        lastNode->next = newNode;
+        return true;
     }
 
     T& read(){
-        T ret = curr->data;
+        T * returnData = (curr->data);
         curr = curr->next;
-        return ret;
+        return *returnData;
     }
 
     bool empty(){
@@ -51,10 +71,12 @@ public:
 
     bool remove(T &data){
         Node<T> *prev = nullptr;
-        for(curr = head; curr != nullptr; curr = curr->next){
-            if(curr->data == data) {
-                if(prev != nullptr) prev->next = curr->next;
-                delete curr;
+        for(Node<T> *currToDelete = head; currToDelete != nullptr; currToDelete = currToDelete->next){
+            if(*(currToDelete->data) == data) {
+                if(prev != nullptr) prev->next = currToDelete->next;
+                else head = currToDelete->next;
+                delete currToDelete;
+                curr = head;
                 return true;                
             }
             prev = curr;
