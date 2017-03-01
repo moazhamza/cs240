@@ -5,15 +5,13 @@
 Deck::Deck(){
     for(int val=2; val<=14; val++){
         for(int suit=1; suit<=4; suit++)
-            this->deck.enqueue(*new Card(suit,val));
+            this->deck.enqueue(Card(suit,val));
     }
 }
 
 Deck::~Deck(){
     while(!deck.empty()){
-        Card cardToDelete = deck.dequeue();
-        delete &cardToDelete;
-        
+        deck.dequeue();
     }
 }
 

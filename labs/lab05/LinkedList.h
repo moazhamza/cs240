@@ -6,7 +6,7 @@ class Node{
 public:
     T *data;
     Node *next;
-    
+
     Node(T *data){
         this->data = data;
         next = nullptr;
@@ -14,7 +14,6 @@ public:
     ~Node(){
         delete data;
     }
-  
 };
 
 template <class T>
@@ -23,7 +22,7 @@ private:
     Node<T> *head;
     Node<T> *curr;
     template<class U> friend class Queue;
-    
+
     Node<T>* findLastNode(){
         Node<T> *currentNode = head;
         while(currentNode->next != nullptr) currentNode = currentNode->next;
@@ -32,12 +31,12 @@ private:
 
 public:
     LinkedList(){
-        head = nullptr;   
+        head = nullptr;
     }
-    /* TODO - Fix copy constructor */
+    /* TODO: Fix copy constructor */
     LinkedList(const LinkedList<T>& sll){
         this->head = sll.head;
-        Node<T> * temp = head;    
+        Node<T> * temp = head;
     }
 
     ~LinkedList(){
@@ -45,9 +44,9 @@ public:
         for(curr = head; curr != nullptr; (curr = next)){
             next = curr->next;
             delete curr;
-        }        
+        }
     }
-    
+
     bool insert(T data){
         T *dataPtr = new T(data);
         Node<T> *newNode = new Node<T>(dataPtr);
@@ -79,12 +78,12 @@ public:
                 else head = currToDelete->next;
                 delete currToDelete;
                 curr = head;
-                return true;                
+                return true;
             }
             prev = curr;
         }
         return false;
     }
-    
+
 };
 #endif

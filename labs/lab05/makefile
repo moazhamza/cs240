@@ -21,7 +21,7 @@ run: all
 	./$(EXECUTABLE)
 
 checkmem: all
-	valgrind --leak-check=full -v ./$(EXECUTABLE) 
+	valgrind ./$(EXECUTABLE) 
 clean:
 	rm -f *.o $(EXECUTABLE)
 

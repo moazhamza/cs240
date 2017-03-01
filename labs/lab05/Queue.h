@@ -10,12 +10,14 @@ private:
 public:
     bool enqueue(T data){
         T *dataHeap = new T(data);
-        return list.insert(*dataHeap);
+        list.insert(*dataHeap);
+        delete dataHeap;
+        return true;
     }
-    T& dequeue(){
-        T *returnData = &list.read();
-        list.remove(*returnData);
-        return *returnData;
+    T dequeue(){
+        T returnData = list.read();
+        list.remove(returnData);
+        return returnData;
     }
     T peek(){
         return list.head->data;

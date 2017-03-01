@@ -12,7 +12,7 @@
 #include <ctime>
 #include <cstdlib>
 
-#define EXTRA_CREDIT 0
+#define EXTRA_CREDIT 1
 
 using namespace std;
 
