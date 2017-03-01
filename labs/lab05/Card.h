@@ -13,9 +13,4 @@ public:
     
     bool operator==(const Card &other);
 };
-
-
-
-
-
 #endif

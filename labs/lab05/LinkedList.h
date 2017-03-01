@@ -31,13 +31,12 @@ public:
     LinkedList(){
         head = nullptr;   
     }
-    LinkedList(const LinkedList<T>& sll){  //fix copy constructor
+    /* TODO - Fix copy constructor */
+    LinkedList(const LinkedList<T>& sll){
         this->head = sll.head;
-        /*Node<T> * temp = head;
-        while(temp != NULL)*/
-        
-        
+        Node<T> * temp = head;    
     }
+
     ~LinkedList(){
         Node<T> *next, *curr;
         for(curr = head; curr != nullptr; (curr = next)){
