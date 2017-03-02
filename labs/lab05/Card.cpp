@@ -5,6 +5,7 @@
 #define LOW_VAL 2
 #define HIGH_VAL 14
 
+/* Constructor for card. Must be a valid playing card suit and value. */
 Card::Card(int suit, int value){
     if(suit >= LOW_SUIT && suit <= HIGH_SUIT) this->suit = suit;
     if(value >= LOW_VAL && value <= HIGH_VAL) this->value = value;
