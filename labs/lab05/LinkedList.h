@@ -30,10 +30,11 @@ private:
     }
 
 public:
+    // Constructor
     LinkedList(){
         head = nullptr;
     }
-
+    // Copy constructor
     LinkedList(const LinkedList<T>& sll){
         Node<T> *newHead = new Node<T>(sll.head->data);
         this->head = newHead;
@@ -43,7 +44,7 @@ public:
             currNode = currNode->next;
         }
     }
-
+    // Destructor -- Deletes all nodes in list 
     ~LinkedList(){
         Node<T> *next, *curr;
         for(curr = head; curr != nullptr; (curr = next)){
@@ -51,7 +52,7 @@ public:
             delete curr;
         }
     }
-
+    // Inserts a copy of data (allocated on the heap) into the list
     bool insert(T data){
         T *dataPtr = new T(data);
         Node<T> *newNode = new Node<T>(dataPtr);
@@ -64,17 +65,17 @@ public:
         lastNode->next = newNode;
         return true;
     }
-
+    // Returns a reference to the next item in the list. Curr is advanced 
     T& read(){
         T * returnData = (curr->data);
         curr = curr->next;
         return *returnData;
     }
-
+    // Checks if list is empty
     bool empty(){
         return head == nullptr;
     }
-
+    // Removes the first instance of data in the list 
     bool remove(T &data){
         Node<T> *prev = nullptr;
         for(Node<T> *currToDelete = head; currToDelete != nullptr; currToDelete = currToDelete->next){

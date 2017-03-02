@@ -7,7 +7,7 @@
 class Deck {
 private:
     Queue<Card> deck;
-    
+    bool isAlreadyUsed(int, int[]); 
 public:
     Deck();
     ~Deck();

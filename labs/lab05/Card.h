@@ -7,8 +7,8 @@ private:
     int value;
 public:
     Card(int,int);
-    int getSuit();
-    int getValue();
+    int getSuit(){return suit;}
+    int getValue(){return value;}
 
     
     bool operator==(const Card &other);

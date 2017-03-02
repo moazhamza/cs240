@@ -25,8 +25,8 @@ Deck::~Deck(){
         deck.dequeue();
     }
 }
-/* Local method which checks if num is in arr */ 
-bool isAlreadyUsed(int num, int arr[]){
+/* Private method which checks if num is in arr */ 
+bool Deck::isAlreadyUsed(int num, int arr[]){
     for(int i=0; i < CARDS_IN_DECK; i++){
         if(num == arr[i]) return true;
     }
@@ -51,6 +51,7 @@ void Deck::shuffle(){
     }
     // Each number corressponds to a card. This will be the new order of the cards.
     this->deck.clear();
+    // Clear the deck and add the cards in the new order 
     for(int i=0; i<CARDS_IN_DECK; i++){
         deck.enqueue(Card((arr[i] / NUM_CARDS_PER_SUIT) + 1, arr[i] % NUM_CARDS_PER_SUIT + 2));
     }

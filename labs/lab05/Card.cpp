@@ -11,13 +11,7 @@ Card::Card(int suit, int value){
     if(value >= LOW_VAL && value <= HIGH_VAL) this->value = value;
 }
 
-int Card::getSuit(){
-    return suit;
-}
-int Card::getValue(){
-    return value;
-}
-
+/* Cards are equal if they have the same value and suit */
 bool Card::operator==(const Card &other){
     return (suit == other.suit && value == other.value);
 }
