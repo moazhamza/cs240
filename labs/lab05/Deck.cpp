@@ -11,19 +11,21 @@
 #define INALID_CARD_NUM -1
 #define NUM_CARDS_PER_SUIT 13
 
+
+/* Deck constructor - Creates deck with all proper playing cards */
 Deck::Deck(){
     for(int val=LOW_VAL; val<=HIGH_VAL; val++){
        for(int suit=LOW_SUIT; suit<=HIGH_SUIT; suit++)
             this->deck.enqueue(Card(suit,val));
     }
 }
-
+/* Deck destructor - Removes all cards from deck */
 Deck::~Deck(){
     while(!deck.empty()){
         deck.dequeue();
     }
 }
-
+/* Local method which checks if num is in arr */ 
 bool isAlreadyUsed(int num, int arr[]){
     for(int i=0; i < CARDS_IN_DECK; i++){
         if(num == arr[i]) return true;
@@ -31,7 +33,7 @@ bool isAlreadyUsed(int num, int arr[]){
     return false;
 }
 
-
+/* Shuffles the deck */
 void Deck::shuffle(){
     int arr[CARDS_IN_DECK];
     // Fill array with default invalid value
