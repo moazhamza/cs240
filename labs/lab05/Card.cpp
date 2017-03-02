@@ -1,8 +1,13 @@
 #include "Card.h"
 
+#define LOW_SUIT 1
+#define HIGH_SUIT 4
+#define LOW_VAL 2
+#define HIGH_VAL 14
+
 Card::Card(int suit, int value){
-    if(suit >= 1 && suit <= 4) this->suit = suit;
-    if(value >= 2 && value <= 14) this->value = value;
+    if(suit >= LOW_SUIT && suit <= HIGH_SUIT) this->suit = suit;
+    if(value >= LOW_VAL && value <= HIGH_VAL) this->value = value;
 }
 
 int Card::getSuit(){
