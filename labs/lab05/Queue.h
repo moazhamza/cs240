@@ -14,6 +14,7 @@ public:
         delete dataHeap;
         return true;
     }
+
     T dequeue(){
         T returnData = list.read();
         list.remove(returnData);
