@@ -22,7 +22,7 @@ private:
     Node<T> *head;
     Node<T> *curr;
     template<class U> friend class Queue;
-
+/* Finds the last node in order to add to it */
     Node<T>* findLastNode(){
         Node<T> *currentNode = head;
         while(currentNode->next != nullptr) currentNode = currentNode->next;
@@ -33,10 +33,15 @@ public:
     LinkedList(){
         head = nullptr;
     }
-    /* TODO: Fix copy constructor */
+
     LinkedList(const LinkedList<T>& sll){
-        this->head = sll.head;
-        Node<T> * temp = head;
+        Node<T> *newHead = new Node<T>(sll.head->data);
+        this->head = newHead;
+        Node<T> *currNode = sll.head;
+        while(currNode != nullptr){
+            this->insert(currNode->data);
+            currNode = currNode->next;
+        }
     }
 
     ~LinkedList(){
