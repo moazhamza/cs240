@@ -6,7 +6,7 @@ class Node{
 public:
     T *data;
     Node *next;
-
+/* Node constructor which takes data of type T */
     Node(T *data){
         this->data = data;
         next = nullptr;
