@@ -10,12 +10,16 @@ template <class T>
 class Sorter {
 private:
     T container;
+    // Private helper function which checks to see if a 
+    // randomly generated number is already being used in the array
     bool isAlreadyUsed(int num, int arr[], unsigned long size){
         for(unsigned long i=0; i < size; i++){
             if(num == arr[i]) return true;
         }
         return false;
     }
+    // Equivalent of [] operator. Used for ease of read 
+    // when using this->operator[]
     typename T::iterator at(int i){
         typename T::iterator current = container.begin();
         for(int j=0; j < i; j++) current++;
@@ -43,7 +47,7 @@ public:
     void shuffle(){
         int arr[container.size()];
         // Fill array with default invalid value
-        for(unsigned int i=0;i<container.size();i++) arr[i] = -1;
+        for(unsigned int i=0; i < container.size(); i++) arr[i] = -1;
         // Loop through array and create a random number
         for(unsigned int i=0; i < container.size(); i++){
             unsigned int rNum = rand() % container.size();
@@ -86,7 +90,7 @@ public:
         
         auto end = std::chrono::high_resolution_clock::now();
         
-        std::cout << "Insertion sort time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count() << " nanoseconds" << std::endl;
+        std::cout << "Insertion sort time: " << std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count() << " microseconds" << std::endl;
         
     }
     
@@ -104,7 +108,7 @@ public:
         
         auto end = std::chrono::high_resolution_clock::now();
         
-        std::cout << "Selection sort time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count() << " nanoseconds" << std::endl;
+        std::cout << "Selection sort time: " << std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count() << " microseconds" << std::endl;
         
     }
     
@@ -123,7 +127,7 @@ public:
         }
         auto end = std::chrono::high_resolution_clock::now();
         
-        std::cout << "Bubble sort time: " << std::chrono::duration_cast<std::chrono::nanoseconds>(end-begin).count() << " nanoseconds" << std::endl;
+        std::cout << "Bubble sort time: " << std::chrono::duration_cast<std::chrono::microseconds>(end-begin).count() << " microseconds" << std::endl;
         
         
         
